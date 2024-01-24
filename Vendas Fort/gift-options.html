@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Opções de Presentes - Envio de Presentes Fortnite</title>
+    <style>
+        /* Adicione estilos CSS para as caixas de produto */
+        .gift-option {
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .gift-option p {
+            margin: 0;
+        }
+
+        .gift-option button {
+            background-color: #3498db;
+            color: #ffffff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .gift-option button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Opções de Presentes</h1>
+    </header>
+
+    <main>
+        <!-- Adicione esta parte para exibir as informações do usuário -->
+        <div class="user-profile" id="userProfile">
+            <h3>Perfil do Usuário <button onclick="toggleUserInfo()">Mostrar/Ocultar</button></h3>
+            <div id="userInfo" style="display: none;">
+                <p>Nome: <span id="user-name"></span> <button onclick="editField('username')">Editar</button></p>
+                <p>Email: <span id="user-email"></span> <button onclick="editField('email')">Editar</button></p>
+                <p>Número de Telefone: <span id="user-phone"></span> <button onclick="editField('phone')">Editar</button></p>
+            </div>
+        </div>
+
+        <!-- Adicione as opções de presentes em caixas -->
+        <div class="gift-options-container">
+            <h2>Opções de Presentes</h2>
+            <div class="gift-option">
+                <p>Presente de 800 V-Bucks - R$10,00</p>
+                <button onclick="contactWhatsApp('Presente de 800 V-Bucks', 10)">Comprar via WhatsApp</button>
+            </div>
+            <div class="gift-option">
+                <p>Presente de 1200 V-Bucks - R$14,00</p>
+                <button onclick="contactWhatsApp('Presente de 1200 V-Bucks', 14)">Comprar via WhatsApp</button>
+            </div>
+            <div class="gift-option">
+                <p>Presente de 1500 V-Bucks - R$18,00</p>
+                <button onclick="contactWhatsApp('Presente de 1500 V-Bucks', 18)">Comprar via WhatsApp</button>
+            </div>
+            <div class="gift-option">
+                <p>Presente de 2000 V-Bucks - R$25,00</p>
+                <button onclick="contactWhatsApp('Presente de 2000 V-Bucks', 25)">Comprar via WhatsApp</button>
+            </div>
+        </div>
+
+        <!-- Adicione o botão para encaminhar para how-it-works -->
+        <div class="how-it-works-button">
+            <button onclick="redirectToHowItWorks()">Como Funciona</button>
+        </div>
+        
+        <!-- Adicione o contador -->
+        <div class="registration-counter">
+            <p>Registros: <span id="registration-counter"></span></p>
+        </div>
+    </main>
+
+    </main>
+
+    <footer>
+        <center><p>&copy; 2024 Envio de Presentes Fortnite</p></center>
+    </footer>
+
+    <script>
+        // Função para obter e exibir as informações do usuário
+        function displayUserData() {
+            var username = localStorage.getItem('username') || '[Nome do Usuário]';
+            var email = localStorage.getItem('email') || '[Email do Usuário]';
+            var phone = localStorage.getItem('phone') || '[Telefone do Usuário]';
+
+            document.getElementById('user-name').innerText = username;
+            document.getElementById('user-email').innerText = email;
+            document.getElementById('user-phone').innerText = phone;
+        }
+
+        // Função para editar um campo
+        function editField(fieldName) {
+            var newValue = prompt('Digite o novo valor:');
+            if (newValue !== null) {  // Verifica se o usuário não cancelou
+                localStorage.setItem(fieldName, newValue);
+                displayUserData();
+            }
+        }
+
+        // Função para atualizar e exibir o contador de registros
+        function updateCounter() {
+            var currentCounter = localStorage.getItem('registrationCounter') || 0;
+            currentCounter++;
+            localStorage.setItem('registrationCounter', currentCounter);
+            document.getElementById('registration-counter').innerText = currentCounter;
+        }
+
+        // Função para mostrar ou ocultar informações do usuário
+        function toggleUserInfo() {
+            var userInfoDiv = document.getElementById('userInfo');
+            var currentDisplay = window.getComputedStyle(userInfoDiv).display;
+            
+            // Alterna entre mostrar e ocultar
+            userInfoDiv.style.display = currentDisplay === 'none' ? 'block' : 'none';
+        }
+
+        // Função para entrar em contato com a pessoa no WhatsApp
+        function contactWhatsApp(product, amount) {
+            var message = 'Estou interessado(a) em comprar o ' + product + ' por R$' + amount + '. Podemos falar mais sobre isso?';
+            
+            // Substitua 'seu-número-de-whatsapp' pelo número de WhatsApp desejado
+            window.open('https://wa.me/+5514991681984/?text=' + encodeURIComponent(message), '_blank');
+        }
+
+        // Função para encaminhar para how-it-works
+        function redirectToHowItWorks() {
+            window.location.href = 'how-it-works.html';
+        }
+
+        // Chame as funções de exibição e atualização assim que a página carregar
+        window.onload = function() {
+            displayUserData();
+            updateCounter();
+        };
+    </script>
+
+</body>
+</html>
